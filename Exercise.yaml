@@ -1,0 +1,21 @@
+name: Azure Pipelines
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      name: Hosted Ubuntu 1604
+    steps:
+     - task: CmdLine@2
+      displayName: install newman runner
+      inputs:
+        script: 'sudo npm install -g newman'
+        workingDirectory: DEFAULT WORKING DIRECTORY
+    - task: CmdLine@2
+      displayName: run starterapis.json with runner
+      continueOnError: true
+      inputs:
+        script: 'newman run starterapis.json'
+        workingDirectory: 'starter-code/automatedtesting/postman'
+   
+    
